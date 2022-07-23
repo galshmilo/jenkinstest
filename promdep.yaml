@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prom-deployment
+  labels:
+    tier: frontend
+    app: application
+spec:
+  selector:
+    matchLabels:
+      app: application
+  replicas: 3
+  template:
+    metadata:
+      name: webapi
+      labels:
+        app: application
+    spec:
+      containers:
+        - name: webapicont
+          image: galshmilo/mylearningrepo:fnl
+          ports:
+          - containerPort: 80
+      imagePullSecrets:
+        - name: regcred
